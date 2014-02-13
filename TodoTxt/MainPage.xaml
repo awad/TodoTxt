@@ -42,12 +42,12 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="Todo.Txt" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="Tasks12" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="Tasks" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector HorizontalAlignment="Left" Height="503" Margin="10,22,0,0" VerticalAlignment="Top" Width="436"/>
+            <phone:LongListSelector HorizontalAlignment="Left" Height="503" Margin="10,22,0,0" VerticalAlignment="Top" Width="436" SelectionChanged="LongListSelector_SelectionChanged"/>
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
@@ -60,7 +60,7 @@
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Assets/Images/add.png" Text="Add"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Images/add.png" Text="Add" Click="btnNewTrip_Click"/>
             <!--<shell:ApplicationBarIconButton IconUri="/Assets/Images/appbar_button2.png" Text="Button 2"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>

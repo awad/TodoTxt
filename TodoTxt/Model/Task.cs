@@ -8,8 +8,15 @@ namespace TodoTxt.Model
 {
     public class Task
     {
-        private string Priority { get; set; }
+        private int Priority { get; set; }
         private bool IsDone { get; set; }
         public string Description { get; set; }
+
+        public Task()
+        {
+            IsDone = false;
+            Description = "";
+            Priority = 5;
+        }
     }
 }

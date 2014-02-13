@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodoTxt.Resources;
@@ -20,6 +19,16 @@ namespace TodoTxt
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnNewTrip_Click(object sender, EventArgs e)
+        {
+            NavigationManager.NavigateToPage(this.NavigationService, "/TodoTxt;component/NewTask.xaml", UriKind.Relative);
         }
 
         // Sample code for building a localized ApplicationBar
