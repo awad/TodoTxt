@@ -3,13 +3,13 @@ using TodoTxt.Model;
 
 namespace TodoTxt.ViewModel
 {
-    public class TaskListVM
+    public static class TaskListVM
     {
-        List<Task> taskList = new List<Task>();
+        public static List<Task> TaskList = new List<Task>();
 
-        public void AddTask(Task task)
+        public static void AddTask(Task task)
         {
-            taskList.Add(task);
+            TaskList.Add(task);
         }
 
     }

@@ -47,7 +47,22 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector HorizontalAlignment="Left" Height="503" Margin="10,22,0,0" VerticalAlignment="Top" Width="436" SelectionChanged="LongListSelector_SelectionChanged"/>
+            <phone:LongListSelector x:Name="lstTasks" HorizontalAlignment="Left" Height="503" Margin="10,22,0,0" VerticalAlignment="Top" Width="436" SelectionChanged="LongListSelector_SelectionChanged">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="75" Width="432">
+                                <StackPanel Width="341" Margin="8,-7,0,0">
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Purple" FontSize="{StaticResource PhoneFontSizeLarge}" />                             
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+
+                </phone:LongListSelector.ItemTemplate>
+
+            </phone:LongListSelector>
+            
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

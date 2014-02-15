@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodoTxt.Resources;
+using TodoTxt.ViewModel;
 
 namespace TodoTxt
 {
@@ -19,6 +20,12 @@ namespace TodoTxt
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+            LoadTaskList();
+        }
+
+        private void LoadTaskList()
+        {
+            lstTasks.ItemsSource = TaskListVM.TaskList;
         }
 
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
