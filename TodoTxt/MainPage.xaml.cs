@@ -8,6 +8,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using TodoTxt.Resources;
 using TodoTxt.ViewModel;
+using System.Windows.Media;
+using TodoTxt.Model;
+using System.Windows.Navigation;
 
 namespace TodoTxt
 {
@@ -28,9 +31,98 @@ namespace TodoTxt
             lstTasks.ItemsSource = TaskListVM.TaskList;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            lstTasks.ItemsSource = TaskListVM.TaskList;
+        }
+
+        /// <summary>
+        /// Recursively get the item.
+        /// </summary>
+        /// <typeparam name="T">The item to get.</typeparam>
+        /// <param name="parents">Parent container.</param>
+        /// <param name="objectList">Item list</param>
+        public static void GetItemsRecursive<T>(DependencyObject parents, ref List<T> objectList) where T : DependencyObject
+        {
+            var childrenCount = VisualTreeHelper.GetChildrenCount(parents);
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parents, i);
+
+                if (child is T)
+                {
+                    objectList.Add(child as T);
+                }
+
+                GetItemsRecursive<T>(child, ref objectList);
+            }
+
+            return;
+        }
+
         private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Get item of LongListSelector.
+            List<UserControl> listItems = new List<UserControl>();
+            GetItemsRecursive<UserControl>(lstTasks, ref listItems);
 
+            // Selected.
+            if (e.AddedItems.Count > 0 && e.AddedItems[0] != null)
+            {
+                foreach (UserControl userControl in listItems)
+                {
+                    if (e.AddedItems[0].Equals(userControl.DataContext))
+                    {
+                        TaskListVM.SelectedTaskList.Add(e.AddedItems[0] as Task);
+                        VisualStateManager.GoToState(userControl, "Selected", true);
+                    }
+                }
+            }
+            // Unselected.
+            if (e.RemovedItems.Count > 0 && e.RemovedItems[0] != null)
+            {
+                foreach (UserControl userControl in listItems)
+                {
+                    if (e.RemovedItems[0].Equals(userControl.DataContext))
+                    {
+                        TaskListVM.SelectedTaskList.Remove(e.RemovedItems[0] as Task);
+                        VisualStateManager.GoToState(userControl, "Normal", true);
+                    }
+                }
+            }
+
+
+            //Appbar
+            var btnEdit = new ApplicationBarIconButton(new Uri("/images/add.png", UriKind.Relative)) { Text = "Edit" };
+            if (this.ApplicationBar.Buttons.Count < 2)
+            {
+                
+
+                btnEdit.Click += new EventHandler(btnEdit_Click);
+                this.ApplicationBar.Buttons.Add(btnEdit);
+            }
+            var btnDelete = new ApplicationBarIconButton(new Uri("/images/add.png", UriKind.Relative)) { Text = "Delete" };
+
+            if (this.ApplicationBar.Buttons.Count < 3)
+            {
+
+                btnDelete.Click += new EventHandler(btnDelete_Click);
+                this.ApplicationBar.Buttons.Add(btnDelete);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
+                TaskListVM.RemoveSelectedTasks();
+
+            
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnNewTrip_Click(object sender, EventArgs e)
