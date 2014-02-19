@@ -23,7 +23,7 @@
                                         <VisualState x:Name="Selected">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="MyBorder">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"></DiscreteObjectKeyFrame>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
