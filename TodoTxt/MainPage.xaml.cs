@@ -28,12 +28,13 @@ namespace TodoTxt
 
         private void LoadTaskList()
         {
+            TaskListVM.GetSavedTasks();
             lstTasks.ItemsSource = TaskListVM.TaskList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            lstTasks.ItemsSource = TaskListVM.TaskList;
+            LoadTaskList();
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace TodoTxt
 
 
             //Appbar
-            var btnEdit = new ApplicationBarIconButton(new Uri("/images/add.png", UriKind.Relative)) { Text = "Edit" };
+            var btnEdit = new ApplicationBarIconButton(new Uri("/assets/images/edit.png", UriKind.Relative)) { Text = "Edit" };
             if (this.ApplicationBar.Buttons.Count < 2)
             {
                 
@@ -102,7 +103,7 @@ namespace TodoTxt
                 btnEdit.Click += new EventHandler(btnEdit_Click);
                 this.ApplicationBar.Buttons.Add(btnEdit);
             }
-            var btnDelete = new ApplicationBarIconButton(new Uri("/images/add.png", UriKind.Relative)) { Text = "Delete" };
+            var btnDelete = new ApplicationBarIconButton(new Uri("/assets/images/delete.png", UriKind.Relative)) { Text = "Delete" };
 
             if (this.ApplicationBar.Buttons.Count < 3)
             {
@@ -113,11 +114,8 @@ namespace TodoTxt
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
-        {
-            
-                TaskListVM.RemoveSelectedTasks();
-
-            
+        {            
+                TaskListVM.RemoveSelectedTasks();          
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
